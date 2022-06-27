@@ -1,15 +1,26 @@
-const request = require("postman-request");
+const geoCode = require("./utils/geocode");
+const forecast = require("./utils/forecast.js");
 
-const url2 =
-  "http://api.weatherstack.com/current?access_key=d8fd5256e0284f763013d73b0ad7498f&query=37.8267,-122.4233&units=f";
-
-request({ url: url2, json: true }, (error, response) => {
-  // const data = JSON.parse(response.body);
-  const details = response.body.current;
-  const curTemp = details.temperature;
-  const feelsLike = details.feelslike;
-  const description = details.weather_descriptions[0];
-  console.log(
-    `${description}. The current temperature is ${curTemp} fahrenheit and it feels like ${feelsLike}`
-  );
-});
+const address = process.argv[2];
+if (!address) {
+  console.log("Provide address");
+} else {
+  geoCode(address, (error, { longitude, latitude, location } = {}) => {
+    if (error) {
+      return console.log(error);
+    }
+    forecast(
+      longitude,
+      latitude,
+      (error, { description, currentTemp, feelsLike }) => {
+        if (error) {
+          return console.log(error);
+        }
+        console.log(location);
+        console.log(
+          `${description}. The current temperature is ${currentTemp} fahrenheit and it feels like ${feelsLike}`
+        );
+      }
+    );
+  });
+}
