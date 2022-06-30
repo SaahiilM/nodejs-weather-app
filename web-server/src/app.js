@@ -1,13 +1,15 @@
 const path = require("path");
 const express = require("express");
-const { application } = require("express");
+const hbs = require("hbs");
 
 // console.log(__dirname);
 // console.log(path.join(__dirname, "../public"));
 const app = express();
 const publicDirectory = path.join(__dirname, "../public");
 // update the views path
-const viewsPath = path.join(__dirname, "../templates");
+const viewsPath = path.join(__dirname, "../templates/views");
+// setting path for partials
+const partialsPath = path.join(__dirname, "../templates/partials");
 
 // to use handlebar via hbs we have to update settings on express
 // takes in key value pair
@@ -15,6 +17,9 @@ app.set("view engine", "hbs");
 
 // setting the customized view path
 app.set("views", viewsPath);
+
+// telling hbs the path for partials
+hbs.registerPartials(partialsPath);
 
 // setup directory for express
 app.use(express.static(publicDirectory));
@@ -40,6 +45,7 @@ app.get("/help", (req, res) => {
   res.render("help", {
     title: "Help",
     message: "This is the help message",
+    name: "Saahiil",
   });
 });
 // app.get("/help", (req, res) => {

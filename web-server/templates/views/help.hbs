@@ -8,8 +8,10 @@
     <title>Document</title>
   </head>
   <body>
-    <h1>{{title}}</h1>
-    <img src="./img/img_569204.png" alt="" />
-    <p>{{name}}</p>
+    {{!-- rendering a partial --}}
+    {{>header}}
+
+    <p>{{message}}</p>
+    {{>footer}}
   </body>
 </html>
