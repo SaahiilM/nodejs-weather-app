@@ -60,6 +60,23 @@ app.get("/weather", (req, res) => {
   res.send({ forecast: "it is 40", location: "New York" });
 });
 
+app.get("/help/*", (req, res) => {
+  res.render("404", {
+    title: "404",
+    name: "Saahiil",
+    errorMessage: "Help Article not found",
+  });
+});
+
+// setting up 404 error page
+// comes last because express matches as the application is set up (1.public folder followed by all app.get)
+app.get("*", (req, res) => {
+  res.render("404", {
+    title: "404",
+    name: "Saahiil",
+    errorMessage: "Page not found",
+  });
+});
 // start server and port number
 app.listen(3000, () => {
   console.log("server is listening on port 3000");
