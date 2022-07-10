@@ -86,6 +86,7 @@ app.get("/weather", (req, res) => {
               description,
               currentTemp,
               feelsLike,
+              forecast: `${description}. The current temperature is ${currentTemp} fahrenheit and it feels like ${feelsLike}`,
             });
           }
         );
