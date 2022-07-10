@@ -78,7 +78,7 @@ app.get("/weather", (req, res) => {
         forecast(
           longitude,
           latitude,
-          (error, { description, currentTemp, feelsLike }) => {
+          (error, { description, currentTemp, feelsLike, humidity }) => {
             if (error) {
               return res.send({
                 error: error,
@@ -90,7 +90,7 @@ app.get("/weather", (req, res) => {
               description,
               currentTemp,
               feelsLike,
-              forecast: `${description}. The current temperature is ${currentTemp} fahrenheit and it feels like ${feelsLike}`,
+              forecast: `${description}. The current temperature is ${currentTemp} fahrenheit and it feels like ${feelsLike}. Humidity is ${humidity}%`,
             });
           }
         );

@@ -31,6 +31,7 @@ const forecast = (long, lat, callback) => {
         currentTemp: details.temperature,
         feelsLike: details.feelslike,
         description: details.weather_descriptions[0],
+        humidity: details.humidity,
       });
     }
   });
